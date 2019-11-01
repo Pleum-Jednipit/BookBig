@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.bookbig">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".bookcover.BookcoverActivity"></activity>
+        <activity android:name=".login.VerifyPhoneActivity" />
+        <activity android:name=".login.PhoneLoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".chat.ChatActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity
+            android:name=".hifive.HiFiveActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity android:name=".setting.UserProfileActivity" />
+        <activity android:name=".setting.NewBookcoverActivity" />
+        <activity android:name=".setting.SettingActivity" />
+        <activity android:name=".setting.UserInfoActivity" />
+        <activity android:name=".registration.AddFirstBookCoverActivity" />
+        <activity android:name=".registration.GenderRegistrationActivity" />
+        <activity android:name=".registration.AgeRegistrationActivity" />
+        <activity android:name=".registration.UserProfileRegistrationActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".login.ChooseLoginRegistrationActivity" />
+    </application>
+
+</manifest>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "222815846070",
+    "firebase_url": "https://bookbig-3ce6d.firebaseio.com",
+    "project_id": "bookbig-3ce6d",
+    "storage_bucket": "bookbig-3ce6d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:222815846070:android:0f3f8b01d472f2fce7f017",
+        "android_client_info": {
+          "package_name": "com.example.bookbig"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "222815846070-574bf5e7p5m9thrs7sgparklgo66d2cl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bookbig",
+            "certificate_hash": "0406b124957ab5915256f0102e5ab24e5e9ebf43"
+          }
+        },
+        {
+          "client_id": "222815846070-5ceq86bkdbqq4sbi3jbmoiffb6inar2c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABsk_3a2JHOYXBalmkefm2WKv_guLamQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "222815846070-5ceq86bkdbqq4sbi3jbmoiffb6inar2c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
