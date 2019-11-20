@@ -5,18 +5,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".login.ChooseLoginRegistrationActivity"
+    android:background="@drawable/bg"
     android:orientation="vertical">
 
-    <Button
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/login"/>
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:paddingTop="100dp">
 
-    <Button
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/bookbig"
+            tools:srcCompat="@drawable/bookbig" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:id="@+id/register" />
+        android:layout_height="618dp"
+        android:layout_weight="0.5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Register" />
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="305dp"
+                android:layout_height="104dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button"
+
+                android:fontFamily="@font/psl114"
+                android:text="Log in"
+                android:textColor="#FFFFFF"
+                android:textSize="36dp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

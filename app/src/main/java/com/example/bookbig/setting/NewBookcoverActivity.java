@@ -9,9 +9,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -47,17 +50,20 @@ public class NewBookcoverActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_bookcover);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(NewBookcoverActivity.this, UserInfoActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int weight = dm.widthPixels;
+        int height = dm.heightPixels;
+        getWindow().setLayout((int)(weight*.8),(int)(height*.6));
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.gravity = Gravity.CENTER;
+        params.x=0;
+        params.y=-20;
+        params.dimAmount = 0.3f;
+        params.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        getWindow().setAttributes(params);
+
+
 
         firestoreOperation = new FirestoreOperation();
         mImageView = findViewById(R.id.image);

@@ -239,11 +239,13 @@ public class MainActivity extends AppCompatActivity {
     public void goToUserInfo(View view) {
         Intent intent = new Intent(MainActivity.this, UserInfoActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
     }
 
     public void goToHiFive(View view) {
         Intent intent = new Intent(MainActivity.this, HiFiveActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slideinright, R.anim.slideoutleft);
     }
 
 

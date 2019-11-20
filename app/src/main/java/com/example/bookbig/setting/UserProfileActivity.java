@@ -6,8 +6,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -27,24 +30,26 @@ public class UserProfileActivity extends AppCompatActivity {
     private FirestoreOperation firestoreOperation;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int weight = dm.widthPixels;
+        int height = dm.heightPixels;
+        getWindow().setLayout((int)(weight*.8),(int)(height*.6));
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.gravity = Gravity.CENTER;
+        params.x=0;
+        params.y=-20;
+        params.dimAmount = 0.3f;
+        params.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        getWindow().setAttributes(params);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(UserProfileActivity.this, UserInfoActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+
+
         firestoreOperation = new FirestoreOperation();
         mName = findViewById(R.id.name);
         mAge = findViewById(R.id.age);
@@ -93,3 +98,4 @@ public class UserProfileActivity extends AppCompatActivity {
         });
     }
 }
+

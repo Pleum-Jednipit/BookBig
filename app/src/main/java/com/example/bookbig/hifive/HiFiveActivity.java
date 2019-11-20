@@ -53,6 +53,7 @@ public class HiFiveActivity extends AppCompatActivity {
                 Intent intent = new Intent(HiFiveActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(R.anim.slideinleft, R.anim.slideoutright);
             }
         });
 

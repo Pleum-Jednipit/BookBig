@@ -7,36 +7,176 @@
     tools:context=".setting.UserInfoActivity"
     android:orientation="vertical">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Profile"
-        android:id="@+id/profile"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add book cover"
-        android:id="@+id/addBookcover"/>
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:gravity = "center_vertical"
+        android:weightSum = "1"
+        android:background="#Fbc996">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Setting"
-        android:id="@+id/setting"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Swipe"
-        android:id="@+id/swipe"/>
+            <LinearLayout
+                android:layout_width="13dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:orientation="horizontal">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Log out"
-        android:id="@+id/userLogout"/>
+                <Button
+                    android:id="@+id/userLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:background="#C15f3c"
+                    android:fontFamily="@font/psl114"
+                    android:gravity="center"
+                    android:text="Log out"
+                    android:textColor="#ffffffff"
+                    android:textSize="20dp" />
+            </LinearLayout>
 
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="179dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.6"
+                android:text="Profile"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="50sp"
+                app:fontFamily="@font/psl114" />
+
+            <Button
+                android:id="@+id/swipe"
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_marginRight="20dp"
+                android:layout_weight="0.2"
+                android:background="@drawable/houseblacksilhouettewithoutdoor"
+                tools:layout_gravity="center" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="222dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="161dp"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@android:drawable/sym_def_app_icon" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/psl114"
+            android:text="As"
+            android:textAlignment="center"
+            android:textSize="30dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="391dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+            <LinearLayout
+                android:layout_width="115dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/setting"
+                    android:layout_width="55dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_weight="0.8"
+                    android:background="@drawable/settings" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="52dp"
+                    android:layout_weight="0.5"
+                    android:text="Setting" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="174dp"
+                android:layout_height="75dp"
+                android:orientation="vertical"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/addBookcover"
+                    android:layout_width="55dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/pencileditbutton"
+                    android:onClick="ShowPopup" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Edit info" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/profile"
+                android:layout_width="92dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center|center_vertical"
+                android:background="@drawable/booksstackofthree" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add book"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="251dp"
+            app:srcCompat="@drawable/untitled4" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

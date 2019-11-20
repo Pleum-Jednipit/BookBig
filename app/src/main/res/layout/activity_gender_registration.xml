@@ -6,26 +6,107 @@
     android:layout_height="match_parent"
     tools:context=".registration.GenderRegistrationActivity"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:gravity = "center_vertical"
+        android:weightSum = "1"
+        android:background="#Fbc996">
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/gender">
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Male"/>
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Female"/>
-    </RadioGroup>
+        <LinearLayout
+            android:layout_width="291dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-    <Button
+            <Button
+                android:layout_width="48dp"
+                android:layout_height="69dp"
+                android:layout_gravity="end"
+                android:layout_marginLeft="0dp"
+                android:layout_weight="0.2"
+                android:background="@drawable/back"
+                tools:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="157dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.6"
+                android:text="BookBig"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="50sp"
+                app:fontFamily="@font/psl114" />
+
+            <LinearLayout
+                android:layout_width="62dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:orientation="horizontal"></LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Continue"
-        android:id="@+id/next"/>
+        android:layout_height="match_parent"
+        android:layout_weight="0.7">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="114dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:fontFamily="@font/psl114"
+                android:gravity="center"
+                android:text="Personal Information"
+                android:textSize="50dp" />
+
+            <RadioGroup
+                android:id="@+id/gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp">
+
+                <RadioButton
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/psl114"
+                    android:text="Male"
+                    android:textSize="30dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/psl114"
+                    android:text="Female"
+                    android:textSize="30dp" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/next"
+                android:layout_width="169dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:background="@drawable/button"
+                android:text="Next"
+                android:textColor="#FFFFFF"
+                tools:textSize="20dp" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
 
 
 </LinearLayout>

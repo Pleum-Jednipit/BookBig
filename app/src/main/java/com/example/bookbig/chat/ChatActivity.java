@@ -55,18 +55,18 @@ public class ChatActivity extends AppCompatActivity {
 
 
         firestoreOperation = new FirestoreOperation();
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ChatActivity.this, HiFiveActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            //@Override
+            //public void onClick(View view) {
+              //  Intent intent = new Intent(ChatActivity.this, HiFiveActivity.class);
+              //  startActivity(intent);
+                //finish();
+            //}
+        //});
 
 
         hifiveId = getIntent().getExtras().getString("hifiveId");

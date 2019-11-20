@@ -69,10 +69,10 @@ public class FirestoreOperation {
 
     public FirestoreOperation() {
 //        For using online data only!!!!
-        settings = new FirebaseFirestoreSettings.Builder()
-                .setPersistenceEnabled(false)
-                .build();
-        db.setFirestoreSettings(settings);
+//        settings = new FirebaseFirestoreSettings.Builder()
+//                .setPersistenceEnabled(false)
+//                .build();
+//        db.setFirestoreSettings(settings);
         currentUserId = mAuth.getUid();
         userAccountRef = db.collection("user_account");
         currentUserAccountRef = db.collection("user_account").document(currentUserId);

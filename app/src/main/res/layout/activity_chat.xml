@@ -6,9 +6,48 @@
     android:windowSoftInputMode="stateHidden|adjustResize"
     tools:context=".chat.ChatActivity"
     android:orientation="vertical">
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:gravity = "center_vertical"
+        android:weightSum = "1"
+        android:background="#Fbc996">
+
+        <LinearLayout
+            android:layout_width="291dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="3dp"
+                android:layout_height="37dp"
+                android:layout_gravity="end"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0.2"
+                android:background="@drawable/arrow"
+                tools:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/profileName"
+                android:layout_width="157dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.6"
+                android:text="BookBig"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="50sp"
+                android:fontFamily="@font/psl114" />
+
+            <LinearLayout
+                android:layout_width="12dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:orientation="horizontal"></LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 
     <androidx.core.widget.NestedScrollView

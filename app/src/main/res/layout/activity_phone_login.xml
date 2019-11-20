@@ -8,15 +8,54 @@
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="68dp"
         android:background="@color/colorPrimary">
 
         <ImageView
             android:layout_width="120dp"
-            android:layout_height="90dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            />
+            android:layout_height="90dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#Fbc996"
+            android:gravity="center_vertical"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="291dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+
+                    android:layout_width="48dp"
+                    android:layout_height="69dp"
+                    android:layout_gravity="end"
+                    android:layout_marginLeft="0dp"
+                    android:layout_weight="0.2"
+                    android:background="@drawable/back"
+                    tools:layout_gravity="center" />
+
+                <TextView
+                    android:layout_width="157dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.6"
+                    android:fontFamily="@font/psl114"
+                    android:text="BookBig"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textSize="50sp" />
+
+                <LinearLayout
+                    android:layout_width="62dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:orientation="horizontal"></LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
 
     </RelativeLayout>
 
@@ -34,47 +73,53 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/imageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="-40dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/psl114"
         android:text="May I ask you phone number?"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="#000000"
+        android:textSize="30dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textView"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal"
         android:padding="15dp">
 
         <Button
             android:id="@+id/countryCode"
-            android:text="Code"
             android:layout_width="120dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Code" />
 
         <EditText
             android:id="@+id/phoneNumber"
             android:layout_width="match_parent"
-            android:singleLine="true"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:digits="0123456789"
             android:hint="Enter your number"
             android:maxLength="10"
-            />
+            android:singleLine="true" />
 
     </LinearLayout>
 
     <Button
         android:id="@+id/send"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_width="201dp"
+        android:layout_height="67dp"
         android:layout_below="@id/linearLayout"
         android:layout_centerHorizontal="true"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/button"
+        android:fontFamily="@font/psl114"
         android:text="Continue"
         android:textAllCaps="false"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:textSize="30dp" />
 
 </RelativeLayout>

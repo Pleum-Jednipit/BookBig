@@ -33,7 +33,6 @@ public class UserInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
-
         firestoreOperation = new FirestoreOperation();
         mSetting = findViewById(R.id.setting);
         mNewBookcover = findViewById(R.id.addBookcover);
@@ -104,7 +103,7 @@ public class UserInfoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(UserInfoActivity.this, UserProfileActivity.class);
                 startActivity(intent);
-                finish();
+                //delete finish()
             }
         });
 
@@ -113,7 +112,7 @@ public class UserInfoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(UserInfoActivity.this, NewBookcoverActivity.class);
                 startActivity(intent);
-                finish();
+                //delete finish()
             }
         });
 
@@ -123,6 +122,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 Intent intent = new Intent(UserInfoActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(R.anim.slideinright, R.anim.slideoutleft);
             }
         });
 
