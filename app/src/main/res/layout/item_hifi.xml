@@ -18,15 +18,17 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name"
-            android:layout_gravity="center"
-            android:id="@+id/hifiveName"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:visibility="invisible"
             android:id="@+id/hifiveId"/>
+
+        <TextView
+            android:id="@+id/hifiveName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Name" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

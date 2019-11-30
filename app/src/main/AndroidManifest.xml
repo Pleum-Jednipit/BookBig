@@ -19,7 +19,7 @@
         <activity android:name=".login.VerifyPhoneActivity" />
         <activity android:name=".login.PhoneLoginActivity"/>
         <activity android:name=".chat.ChatBookcoverDisplayActivity"
-            android:theme="@style/AppTheme.Popup" />/>
+            android:theme="@style/AppTheme.Popup" />
         <activity
             android:name=".chat.ChatActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
