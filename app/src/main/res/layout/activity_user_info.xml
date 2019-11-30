@@ -21,8 +21,9 @@
             android:layout_weight="1">
 
             <LinearLayout
-                android:layout_width="13dp"
+                android:layout_width="23dp"
                 android:layout_height="match_parent"
+                android:layout_marginRight="10sp"
                 android:layout_weight="0.2"
                 android:orientation="horizontal">
 
@@ -32,6 +33,7 @@
                     android:layout_height="39dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10sp"
                     android:background="@drawable/exit12"
                     android:fontFamily="@font/psl114"
                     android:gravity="center"
@@ -51,17 +53,24 @@
                 android:textSize="50sp"
                 app:fontFamily="@font/psl114" />
 
-            <Button
-                android:id="@+id/swipe"
-                android:layout_width="1dp"
-                android:layout_height="40dp"
-                android:layout_gravity="end"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="20dp"
+            <LinearLayout
+                android:layout_width="33sp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="9sp"
                 android:layout_weight="0.2"
-                android:background="@drawable/houseblacksilhouettewithoutdoor"
-                android:paddingBottom="30dp"
-                tools:layout_gravity="center" />
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/swipe"
+                    android:layout_width="1dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="0.2"
+                    android:background="@drawable/houseblacksilhouettewithoutdoor"
+                    tools:layout_gravity="center" />
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

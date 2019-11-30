@@ -2,10 +2,13 @@ package com.example.bookbig.chat;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 
 import com.example.bookbig.R;
 import com.example.bookbig.hifive.HiFiveViewHolder;
@@ -37,14 +40,17 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
         holder.mMessage.setText(chatList.get(position).getMessage());
+        GradientDrawable gradientDrawable = (GradientDrawable) holder.mMessage.getBackground().mutate();
         if(chatList.get(position).getCurrentUser()){
-            holder.mMessage.setGravity(Gravity.END);
+            holder.mContainer.setGravity(Gravity.END);
             holder.mMessage.setTextColor(Color.parseColor("#404040"));
-            holder.mContainer.setBackgroundColor(Color.parseColor("#F4F4F4"));
+            gradientDrawable.setColor(Color.rgb(244, 244, 244));
+            //holder.mMessage.setBackgroundColor(Color.parseColor("#F4F4F4"));
         }else{
-            holder.mMessage.setGravity(Gravity.START);
+            holder.mContainer.setGravity(Gravity.START);
             holder.mMessage.setTextColor(Color.parseColor("#FFFFFF"));
-            holder.mContainer.setBackgroundColor(Color.parseColor("#2DB4CB"));
+            gradientDrawable.setColor(Color.rgb(251, 201, 150));
+            //holder.mMessage.setBackgroundColor(Color.parseColor("#2DB4CB"));
         }
     }
 
