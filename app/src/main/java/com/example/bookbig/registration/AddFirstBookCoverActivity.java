@@ -3,6 +3,7 @@ package com.example.bookbig.registration;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -75,6 +76,24 @@ public class AddFirstBookCoverActivity extends AppCompatActivity {
             }
         });
 
+        mName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        mDescription.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
 
         final List<String> bookcoverType = new ArrayList<>();
         //Add book cover type
@@ -122,16 +141,6 @@ public class AddFirstBookCoverActivity extends AppCompatActivity {
                 finish();
             }
         });
-//        firestoreOperation.getBookcoverType(new FirestoreOperation.BookcoverTypeCallback() {
-//            @Override
-//            public void onCallback(List<BookcoverType> list) {
-//        Log.d(TAG,list.toString());
-//        List <String> arraylist = new ArrayList<>();
-//        for(BookcoverType b : list){
-//            arraylist.add(b.getName());
-//        }
-//            }
-//        });
     }
 
     private void openGallery() {
@@ -147,5 +156,10 @@ public class AddFirstBookCoverActivity extends AppCompatActivity {
             imageUri = data.getData();
             mImageView.setImageURI(imageUri);
         }
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

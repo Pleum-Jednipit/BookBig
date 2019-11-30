@@ -22,6 +22,7 @@ import android.widget.RadioGroup;
 
 import com.bumptech.glide.Glide;
 import com.example.bookbig.FirestoreOperation;
+import com.example.bookbig.Profile;
 import com.example.bookbig.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -56,7 +57,8 @@ public class UserProfileActivity extends AppCompatActivity {
         getWindow().setAttributes(params);
 
 
-
+        Profile profile =  getIntent().getParcelableExtra("Profile");
+        Log.d(TAG,profile.getName());
         firestoreOperation = new FirestoreOperation();
         mName = findViewById(R.id.name);
         mAge = findViewById(R.id.age);
@@ -65,37 +67,14 @@ public class UserProfileActivity extends AppCompatActivity {
         mGender = findViewById(R.id.gender);
         mRadioMale = findViewById(R.id.male);
         mRadioFemale = findViewById(R.id.female);
-        firestoreOperation.getCurrentUserAccountRef()
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                                String name = document.getData().get("name").toString();
-                                String age = document.getData().get("age").toString();
-                                String gender = document.getData().get("gender").toString();
-                                String profilePic = document.getData().get("profilePicture").toString();
-                                mName.setText(name);
-                                mAge.setText(age);
-                                Glide.with(getBaseContext()).load(profilePic).into(mImageView);
-                                if(gender.equals("Male")){
-                                    mGender.check(mRadioMale.getId());
-                                } else {
-                                    mGender.check(mRadioFemale.getId());
-                                }
-
-                            } else {
-                                Log.d(TAG, "No such document");
-                            }
-                        } else {
-                            Log.d(TAG, "get failed with ", task.getException());
-                        }
-                    }
-                });
-
+        mName.setText(profile.getName());
+        mAge.setText(profile.getAge());
+        Glide.with(getBaseContext()).load(profile.getProfilePicture()).into(mImageView);
+        if(profile.getGender().equals("Male")){
+            mGender.check(mRadioMale.getId());
+        } else {
+            mGender.check(mRadioFemale.getId());
+        }
 
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override

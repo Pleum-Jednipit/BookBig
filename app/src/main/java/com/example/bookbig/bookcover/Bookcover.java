@@ -1,12 +1,16 @@
 package com.example.bookbig.bookcover;
 
-public class Bookcover {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Bookcover implements Parcelable {
     private String userId;
     private String name;
     private String description;
     private String photoUrl;
     private String bookcoverType;
     private String bookcoverId;
+
 
 
     public String getBookcoverType() {
@@ -74,4 +78,39 @@ public class Bookcover {
                 '}';
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.userId);
+        dest.writeString(this.name);
+        dest.writeString(this.description);
+        dest.writeString(this.photoUrl);
+        dest.writeString(this.bookcoverType);
+        dest.writeString(this.bookcoverId);
+    }
+
+    protected Bookcover(Parcel in) {
+        this.userId = in.readString();
+        this.name = in.readString();
+        this.description = in.readString();
+        this.photoUrl = in.readString();
+        this.bookcoverType = in.readString();
+        this.bookcoverId = in.readString();
+    }
+
+    public static final Parcelable.Creator<Bookcover> CREATOR = new Parcelable.Creator<Bookcover>() {
+        @Override
+        public Bookcover createFromParcel(Parcel source) {
+            return new Bookcover(source);
+        }
+
+        @Override
+        public Bookcover[] newArray(int size) {
+            return new Bookcover[size];
+        }
+    };
 }

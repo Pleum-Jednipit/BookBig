@@ -180,7 +180,9 @@ public class ChatActivity extends AppCompatActivity {
     public void sendMessage(String hifiveId, String message) {
         if (!message.isEmpty()) {
             Map<String, Object> messageMap = new HashMap<>();
-            String timestamp = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+            Long tsLong = System.currentTimeMillis()/1000;
+            String timestamp = tsLong.toString();
+//            String timestamp = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
             messageMap.put("hifiveId",hifiveId);
             messageMap.put("sendByUser", firestoreOperation.getCurrentUserId());
             messageMap.put("message", message);

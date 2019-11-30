@@ -1,8 +1,11 @@
 package com.example.bookbig;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.Nullable;
 
-public class Profile {
+public class Profile implements Parcelable {
     private String name;
     private String age;
     private String gender;
@@ -82,13 +85,12 @@ public class Profile {
         return longtitude;
     }
 
-    public Profile(String name, String age, String gender,String userId,String phoneNumber,long maxDistance) {
+    public Profile(String name, String age, String gender,String profilePicture) {
         this.name = name;
         this.age = age;
         this.gender = gender;
-        this.userId = userId;
-        this.phoneNumber = phoneNumber;
-        this.maxDistance = maxDistance;
+        this.profilePicture = profilePicture;
+
     }
 
     public Profile(String name, String age, String gender,String userId,String phoneNumber,long maxDistance,String profilePicture) {
@@ -151,4 +153,46 @@ public class Profile {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeString(this.age);
+        dest.writeString(this.gender);
+        dest.writeString(this.userId);
+        dest.writeString(this.latitude);
+        dest.writeString(this.longtitude);
+        dest.writeString(this.phoneNumber);
+        dest.writeString(this.profilePicture);
+        dest.writeLong(this.maxDistance);
+    }
+
+    protected Profile(Parcel in) {
+        this.name = in.readString();
+        this.age = in.readString();
+        this.gender = in.readString();
+        this.userId = in.readString();
+        this.latitude = in.readString();
+        this.longtitude = in.readString();
+        this.phoneNumber = in.readString();
+        this.profilePicture = in.readString();
+        this.maxDistance = in.readLong();
+    }
+
+    public static final Parcelable.Creator<Profile> CREATOR = new Parcelable.Creator<Profile>() {
+        @Override
+        public Profile createFromParcel(Parcel source) {
+            return new Profile(source);
+        }
+
+        @Override
+        public Profile[] newArray(int size) {
+            return new Profile[size];
+        }
+    };
 }

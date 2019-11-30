@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.bookbig.FirestoreOperation;
 import com.example.bookbig.MainActivity;
+import com.example.bookbig.Profile;
 import com.example.bookbig.R;
 import com.example.bookbig.bookcover.BookcoverActivity;
 import com.example.bookbig.login.LoginHomePageActivity;
@@ -34,6 +35,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private TextView distanceLabel,mName;
     private ImageView mImageView;
     private float distance;
+    private Profile userProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +111,7 @@ public class UserInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(UserInfoActivity.this, UserProfileActivity.class);
+                intent.putExtra("Profile",userProfile);
                 startActivity(intent);
                 //delete finish()
             }
@@ -177,8 +180,11 @@ public class UserInfoActivity extends AppCompatActivity {
                             if (document.exists()) {
                                 Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                                 String name = document.getData().get("name").toString();
+                                String age = document.getData().get("age").toString();
+                                String gender = document.getData().get("gender").toString();
                                 String profilePic = document.getData().get("profilePicture").toString();
                                 mName.setText(name);
+                                userProfile = new Profile(name,age,gender,profilePic);
                                 Glide.with(getBaseContext()).load(profilePic).into(mImageView);
                             } else {
                                 Log.d(TAG, "No such document");
