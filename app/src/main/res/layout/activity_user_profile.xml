@@ -2,50 +2,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="330dp"
-    android:layout_height="410dp"
+    android:layout_height="500dp"
     android:layout_gravity="center"
-    android:background="#Fbc996"
+    android:background="#E2A263"
     tools:context=".setting.NewBookcoverActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView8"
-            android:layout_width="wrap_content"
+            android:layout_width="149dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/psl114"
             android:text="Edit Profile"
+            android:textAlignment="center"
             android:textSize="40dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="464dp"
+            android:background="#FBC996"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="190dp"
                 android:layout_gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/image"
+                    android:id="@+id/profilePicture"
                     android:layout_width="143dp"
-                    android:layout_height="115dp" />
+                    android:layout_height="match_parent" />
 
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/psl114"
-                    android:text="As"
-                    android:textSize="40dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -60,12 +56,20 @@
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:paddingLeft="10dp"
                     android:text="New Name" />
 
                 <EditText
                     android:id="@+id/age"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:inputType="number"
+                    android:paddingLeft="10dp"
+                    android:text="Age" />
 
                 <RadioGroup
                     android:id="@+id/gender"
@@ -76,24 +80,34 @@
                         android:id="@+id/male"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
                         android:text="@string/male" />
 
                     <RadioButton
                         android:id="@+id/female"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
                         android:text="@string/female" />
+
                 </RadioGroup>
 
-                <Button
-                    android:id="@+id/save"
-                    android:layout_width="63dp"
-                    android:layout_height="61dp"
-                    android:layout_gravity="right"
-                    android:background="@drawable/buttonaccept" />
 
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="100dp"
+        android:layout_height="98dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="right"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/buttonaccept" />
 
 </RelativeLayout>

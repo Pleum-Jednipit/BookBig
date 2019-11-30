@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.PhoneLoginActivity">
+    tools:context=".login.PhoneLoginActivity"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    android:focusable="true">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -73,10 +76,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/imageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-40dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="0dp"
         android:fontFamily="@font/psl114"
-        android:text="May I ask you phone number?"
+        android:text="Enter your mobile phone number"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textColor="#000000"
         android:textSize="30dp" />
@@ -86,8 +89,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textView"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal"
         android:padding="15dp">
 
@@ -95,7 +98,8 @@
             android:id="@+id/countryCode"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="Code" />
+            android:background="#CFC1C1"
+            android:text="Thailand" />
 
         <EditText
             android:id="@+id/phoneNumber"
@@ -104,8 +108,10 @@
             android:layout_weight="2"
             android:digits="0123456789"
             android:hint="Enter your number"
+            android:inputType="number"
             android:maxLength="10"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textAlignment="center" />
 
     </LinearLayout>
 
@@ -115,6 +121,7 @@
         android:layout_height="67dp"
         android:layout_below="@id/linearLayout"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="200dp"
         android:background="@drawable/button"
         android:fontFamily="@font/psl114"
         android:text="Continue"

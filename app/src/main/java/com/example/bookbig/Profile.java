@@ -10,7 +10,24 @@ public class Profile {
     private String latitude;
     private String longtitude;
     private String phoneNumber;
-    private int maxDistance;
+    private String profilePicture;
+    private long maxDistance;
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public long getMaxDistance() {
+        return maxDistance;
+    }
+
+    public void setMaxDistance(long maxDistance) {
+        this.maxDistance = maxDistance;
+    }
 
     public void setUserId(String userId) {
         this.userId = userId;
@@ -65,13 +82,23 @@ public class Profile {
         return longtitude;
     }
 
-    public Profile(String name, String age, String gender,String userId,String phoneNumber,int maxDistance) {
+    public Profile(String name, String age, String gender,String userId,String phoneNumber,long maxDistance) {
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.userId = userId;
         this.phoneNumber = phoneNumber;
         this.maxDistance = maxDistance;
+    }
+
+    public Profile(String name, String age, String gender,String userId,String phoneNumber,long maxDistance,String profilePicture) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.userId = userId;
+        this.phoneNumber = phoneNumber;
+        this.maxDistance = maxDistance;
+        this.profilePicture = profilePicture;
     }
 
     public Profile(String userId, String latitude, String longtitude) {

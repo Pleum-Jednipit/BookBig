@@ -18,6 +18,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class GenderRegistrationActivity extends AppCompatActivity {
     private static final String TAG = "Add Name to FireStore:";
+    private static final String maleProfile = "https://firebasestorage.googleapis.com/v0/b/bookbig-3ce6d.appspot.com/o/bookcover%2Fuser%20boy3.png?alt=media&token=2275dd43-9ff5-4651-bbcc-8442bb864f86";
+    private static final String femaleProfile = "https://firebasestorage.googleapis.com/v0/b/bookbig-3ce6d.appspot.com/o/bookcover%2Fuser%20girl3.png?alt=media&token=b38fa169-036e-41ca-866d-6d2e55c58afb";
     private Button mContinue;
     private RadioGroup mRadioGroup;
     private FirestoreOperation firestoreOperation;
@@ -43,8 +45,13 @@ public class GenderRegistrationActivity extends AppCompatActivity {
                 int selectedId = mRadioGroup.getCheckedRadioButtonId();
                 final RadioButton genderRadioButton =  findViewById(selectedId);
                 String gender = genderRadioButton.getText().toString();
-
-                Profile profile = new Profile(name,age,gender,firestoreOperation.getCurrentUserId(),phoneNumber,20);
+                String profilePicture;
+                if(gender.equals("Male")){
+                    profilePicture = maleProfile;
+                } else{
+                    profilePicture = femaleProfile;
+                }
+                Profile profile = new Profile(name,age,gender,firestoreOperation.getCurrentUserId(),phoneNumber,20,profilePicture);
                 firestoreOperation.setUserAccount(profile);
                 Intent intent = new Intent(GenderRegistrationActivity.this, AddFirstBookCoverActivity.class);
                 startActivity(intent);

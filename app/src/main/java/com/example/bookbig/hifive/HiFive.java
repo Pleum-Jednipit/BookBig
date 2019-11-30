@@ -8,6 +8,16 @@ public class HiFive {
     private Timestamp timestamp;;
     private String hifiveId;
     private String name;
+    private String chatUserId;
+    private String profilePicture;
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 
     public String getHifiveId() {
         return hifiveId;
@@ -17,10 +27,22 @@ public class HiFive {
         return userId;
     }
 
-
-    public HiFive(String name,String hifiveId) {
+    public HiFive(String name,String hifiveId,String chatUserId,String profilePicture) {
         this.name = name;
         this.hifiveId = hifiveId;
+        this.chatUserId = chatUserId;
+        this.profilePicture = profilePicture;
+    }
+
+
+    public HiFive(String name,String hifiveId,String chatUserId) {
+        this.name = name;
+        this.hifiveId = hifiveId;
+        this.chatUserId = chatUserId;
+    }
+
+    public String getChatUserId() {
+        return chatUserId;
     }
 
     public HiFive(List<String> userId, String hifiveId) {

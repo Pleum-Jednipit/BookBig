@@ -76,7 +76,7 @@ public class AddFirstBookCoverActivity extends AppCompatActivity {
         });
 
 
-        List<String> bookcoverType = new ArrayList<>();
+        final List<String> bookcoverType = new ArrayList<>();
         //Add book cover type
         bookcoverType.add("Romantice");
         bookcoverType.add("Sci fi");
@@ -115,7 +115,8 @@ public class AddFirstBookCoverActivity extends AppCompatActivity {
             public void onClick(View view) {
                 final String name = mName.getText().toString();
                 final String description = mDescription.getText().toString();
-                firestoreOperation.setBookcover(name,description,imageUri);
+                final String type = mSpinner.getSelectedItem().toString();
+                firestoreOperation.setBookcover(name,description,imageUri,type);
                 Intent intent = new Intent(AddFirstBookCoverActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.bookbig.R;
 
 import java.util.ArrayList;
@@ -36,7 +37,8 @@ public class HiFiAdapter extends RecyclerView.Adapter<HiFiveViewHolder> {
     public void onBindViewHolder(@NonNull HiFiveViewHolder holder, int position) {
         holder.mHiFiveName.setText(hiFiveList.get(position).getName());
         holder.mHiFiveId.setText(hiFiveList.get(position).getHifiveId());
-//        Glide.with(context).load(hiFiveList.get(position))
+        holder.mHifiveUserId.setText(hiFiveList.get(position).getChatUserId());
+        Glide.with(context).load(hiFiveList.get(position).getProfilePicture()).into(holder.mHiFiveImage);
     }
 
     @Override

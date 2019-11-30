@@ -153,15 +153,15 @@ public class MainActivity extends AppCompatActivity {
                 Bookcover bookcover = (Bookcover) dataObject;
                 firestoreOperation.setNope(bookcover);
 
-                Toast.makeText(MainActivity.this, "Left", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Nope!!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onRightCardExit(Object dataObject) {
                 final Bookcover bookcover = (Bookcover) dataObject;
                 firestoreOperation.setLike(bookcover);
+                Toast.makeText(MainActivity.this, "Like!!", Toast.LENGTH_SHORT).show();
                 firestoreOperation.isHiFive(bookcover.getUserId());
-                Toast.makeText(MainActivity.this, "Right", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -269,7 +269,8 @@ public class MainActivity extends AppCompatActivity {
                                     String description = document.getData().get("description").toString();
                                     String userId = document.getData().get("userId").toString();
                                     String photoUrl = document.getData().get("photoUrl").toString();
-                                    Bookcover bookcover = new Bookcover(name, description, photoUrl, userId, bookcoverId);
+                                    String bookcoverType = document.getData().get("bookcoverType").toString();
+                                    Bookcover bookcover = new Bookcover(name, description, photoUrl, userId, bookcoverId,bookcoverType);
                                     if (!bookcover.getUserId().equals(firestoreOperation.getCurrentUserId())) {
                                         bookcoverList.add(bookcover);
                                     }
@@ -441,7 +442,8 @@ public class MainActivity extends AppCompatActivity {
                                     String description = document.getData().get("description").toString();
                                     String userId = document.getData().get("userId").toString();
                                     String photoUrl = document.getData().get("photoUrl").toString();
-                                    Bookcover bookcover = new Bookcover(name, description, photoUrl, userId, bookcoverId);
+                                    String bookcoverType = document.getData().get("bookcoverType").toString();
+                                    Bookcover bookcover = new Bookcover(name, description, photoUrl, userId, bookcoverId,bookcoverType);
 //                                    if (!bookcover.getUserId().equals(firestoreOperation.getCurrentUserId())) {
 //                                        bookcoverList.add(bookcover);
 //                                    }

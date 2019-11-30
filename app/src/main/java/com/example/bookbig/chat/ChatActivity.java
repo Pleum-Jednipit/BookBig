@@ -8,10 +8,12 @@ import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
@@ -40,7 +42,7 @@ public class ChatActivity extends AppCompatActivity {
     private RecyclerView.Adapter mChatAdapter;
     private RecyclerView.LayoutManager mChatLayoutManager;
     private String hifiveId;
-    private String name;
+    private String name,userId;
     private List<Chat> resultChat;
     private EditText mMessage;
     private Button mSend;
@@ -55,36 +57,45 @@ public class ChatActivity extends AppCompatActivity {
 
 
         firestoreOperation = new FirestoreOperation();
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setDisplayShowTitleEnabled(false);
-        //toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            //@Override
-            //public void onClick(View view) {
-              //  Intent intent = new Intent(ChatActivity.this, HiFiveActivity.class);
-              //  startActivity(intent);
-                //finish();
-            //}
-        //});
-
-
         hifiveId = getIntent().getExtras().getString("hifiveId");
         name = getIntent().getExtras().getString("name");
+        userId = getIntent().getExtras().getString("userId");
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         mProfileName = findViewById(R.id.profileName);
         mProfileName.setText(name);
         mProfileName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(ChatActivity.this, ChatBookcoverActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("hifiveId",hifiveId);
+                bundle.putString("name",name);
+                bundle.putString("userId",userId);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChatActivity.this, HiFiveActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
         mScrollView = findViewById(R.id.scrollView);
+        mScrollView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mScrollView.fullScroll(View.FOCUS_DOWN);
+            }
+        },100);
         resultChat = new ArrayList<>();
         Log.d("TEST","Match ID: " + hifiveId);
-//        getInitialChatMessage(hifiveId);
-//        getChatMessage(hifiveId);
         getMessage();
         mRecyclerView = findViewById(R.id.recyclerview);
         mRecyclerView.setNestedScrollingEnabled(false);
@@ -103,6 +114,15 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View view) {
                 sendMessage(hifiveId,mMessage.getText().toString());
                 mMessage.setText(null);
+            }
+        });
+
+        mMessage.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
             }
         });
 
@@ -145,12 +165,13 @@ public class ChatActivity extends AppCompatActivity {
                             }
                         }
                         mChatAdapter.notifyDataSetChanged();
-                        mScrollView.post(new Runnable() {
+                        mScrollView.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                                mScrollView.fullScroll(View.FOCUS_DOWN);
                             }
-                        });
+                        },100);
+
                     }
                 });
 
@@ -183,8 +204,24 @@ public class ChatActivity extends AppCompatActivity {
                 }
             });
         }
+        mScrollView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mScrollView.fullScroll(View.FOCUS_DOWN);
+            }
+        },100);
     }
 
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        mScrollView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mScrollView.fullScroll(View.FOCUS_DOWN);
+            }
+        },100);
+    }
 
 
 

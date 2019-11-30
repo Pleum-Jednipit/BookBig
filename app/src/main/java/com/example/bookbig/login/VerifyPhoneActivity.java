@@ -3,13 +3,16 @@ package com.example.bookbig.login;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bookbig.MainActivity;
@@ -37,6 +40,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressBar mProgressBar;
     private EditText mEnterCode;
+    private TextView mPhoneNumber;
     private Button mResendCode, mLogin;
     private String phoneNumber;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -47,10 +51,12 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mProgressBar = findViewById(R.id.progressbar);
         mResendCode = findViewById(R.id.resendCode);
+        mPhoneNumber = findViewById(R.id.phoneNumber);
         mLogin = findViewById(R.id.login);
         mEnterCode = findViewById(R.id.enterCode);
         phoneNumber = getIntent().getStringExtra("phoneNumber");
-        Log.d("Phone",phoneNumber);
+        mPhoneNumber.setText(phoneNumber);
+        Log.d("HEREEEERr",phoneNumber);
         sendVerificationCode(phoneNumber);
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +78,15 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sendVerificationCode(phoneNumber);
+            }
+        });
+
+        mEnterCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
             }
         });
 
@@ -198,6 +213,11 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             // ...
         }
     };
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 
 
     }

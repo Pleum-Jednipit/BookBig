@@ -37,12 +37,13 @@ public class Bookcover {
         return description;
     }
 
-    public Bookcover(String name, String description, String photoUrl, String userId,String bookcoverId) {
+    public Bookcover(String name, String description, String photoUrl, String userId,String bookcoverId,String bookcoverType) {
         this.userId = userId;
         this.name = name;
         this.description = description;
         this.photoUrl = photoUrl;
         this.bookcoverId = bookcoverId;
+        this.bookcoverType = bookcoverType;
     }
 
 

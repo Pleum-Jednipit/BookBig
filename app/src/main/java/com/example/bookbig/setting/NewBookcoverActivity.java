@@ -1,9 +1,11 @@
 package com.example.bookbig.setting;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -23,11 +25,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.bumptech.glide.Glide;
 import com.example.bookbig.FirestoreOperation;
 import com.example.bookbig.R;
+import com.example.bookbig.bookcover.Bookcover;
+import com.example.bookbig.bookcover.BookcoverActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,11 +50,12 @@ public class NewBookcoverActivity extends AppCompatActivity {
     private Spinner mSpinner;
     private ImageView mImageView;
     private Button mDone, mAddPhoto;
-    private EditText mName, mDescription;
+    private EditText mName, mDescription,mBookcoverId;
     private Uri imageUri;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirestoreOperation firestoreOperation;
+    private String bookcoverId = "None";
 
 
     @Override
@@ -72,6 +85,18 @@ public class NewBookcoverActivity extends AppCompatActivity {
         mName = findViewById(R.id.name);
         mDescription = findViewById(R.id.description);
 
+        try{
+            bookcoverId = getIntent().getExtras().getString("bookcoverId");
+        } catch (NullPointerException e){
+            System.out.println(e);
+        }
+
+        if(!bookcoverId.equals("None")){
+            Log.d(TAG,bookcoverId);
+            getBookCover();
+        }
+
+
         mName.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -94,8 +119,26 @@ public class NewBookcoverActivity extends AppCompatActivity {
             }
         });
 
+        mDescription.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
 
-        List<String> bookcoverType = new ArrayList<>();
+        mName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+
+        final List<String> bookcoverType = new ArrayList<>();
         //Add book cover type
         bookcoverType.add("Romantice");
         bookcoverType.add("Sci fi");
@@ -131,10 +174,15 @@ public class NewBookcoverActivity extends AppCompatActivity {
             public void onClick(View view) {
                 final String name = mName.getText().toString();
                 final String description = mDescription.getText().toString();
-                firestoreOperation.setBookcover(name,description,imageUri);
-                Intent intent = new Intent(NewBookcoverActivity.this, UserInfoActivity.class);
+                final String type = mSpinner.getSelectedItem().toString();
+                if(!bookcoverId.equals("None")){
+                    firestoreOperation.updateBookcover(name,description,imageUri,type,bookcoverId);
+                }else {
+                    firestoreOperation.setBookcover(name,description,imageUri,type);
+                }
+                Intent intent = new Intent(NewBookcoverActivity.this, BookcoverActivity.class);
                 startActivity(intent);
-                finish();
+//                finish();
             }
         });
     }
@@ -153,4 +201,71 @@ public class NewBookcoverActivity extends AppCompatActivity {
             mImageView.setImageURI(imageUri);
         }
     }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+//    private interface BookcoverCallback{
+//        void onCallBack(Bookcover bookcover);
+//    }
+
+//    public void getBookCover(final BookcoverCallback bookcoverCallback) {
+//        firestoreOperation.getBookcoverRef()
+//                .whereEqualTo("bookcoverId",bookcoverId)
+//                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onEvent(@Nullable QuerySnapshot value,
+//                                        @Nullable FirebaseFirestoreException e) {
+//                        if (e != null) {
+//                            Log.w(TAG, "Listen failed.", e);
+//                            return;
+//                        }
+//                        for (QueryDocumentSnapshot document : value) {
+//                            if (document.exists()) {
+//                                Log.d(TAG, document.getId() + " => " + document.getData());
+//                                String bookcoverId = document.getData().get("bookcoverId").toString();
+//                                String name = document.getData().get("name").toString();
+//                                String description = document.getData().get("description").toString();
+//                                String userId = document.getData().get("userId").toString();
+//                                String photoUrl = document.getData().get("photoUrl").toString();
+//                                Bookcover bookcover = new Bookcover(name, description, photoUrl, userId, bookcoverId);
+//                            }
+//                        }
+//
+//
+//                    }
+//                });
+//    }
+
+        private void getBookCover() {
+            firestoreOperation.getBookcoverRef()
+                    .whereEqualTo("bookcoverId",bookcoverId)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Log.d(TAG, document.getId() + " => " + document.getData());
+                                    String bookcoverId = document.getData().get("bookcoverId").toString();
+                                    String name = document.getData().get("name").toString();
+                                    String description = document.getData().get("description").toString();
+                                    String userId = document.getData().get("userId").toString();
+                                    String photoUrl = document.getData().get("photoUrl").toString();
+                                    String bookcoverType = document.getData().get("bookcoverType").toString();
+                                    Bookcover bookcover = new Bookcover(name, description, photoUrl, userId, bookcoverId,bookcoverType);
+                                    mName.setText(bookcover.getName());
+                                    mDescription.setText(bookcover.getDescription());
+                                    Glide.with(getBaseContext()).load(bookcover.getPhotoUrl()).into(mImageView);
+                                    mSpinner.setSelection(1);
+                                }
+                            } else {
+                                Log.d(TAG, "Error getting documents: ", task.getException());
+                            }
+                        }
+                    });
+
+        }
 }

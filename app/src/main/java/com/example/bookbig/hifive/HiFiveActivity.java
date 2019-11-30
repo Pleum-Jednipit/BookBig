@@ -45,7 +45,6 @@ public class HiFiveActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recyclerview);
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(true);
-        mSearchBar = findViewById(R.id.searchBar);
         mSwipe = findViewById(R.id.swipe);
         mSwipe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,9 +116,10 @@ public class HiFiveActivity extends AppCompatActivity {
                                     Log.d(TAG,snapshot.getData().toString());
                                     String name = snapshot.getData().get("name").toString();
                                     String userId = snapshot.getData().get("userId").toString();
+                                    String profilePicture = snapshot.getData().get("profilePicture").toString();
                                     Profile profile = new Profile(name,userId);
                                     profileList.add(profile);
-                                    HiFive hiFive = new HiFive(profile.getName(),hifiveId);
+                                    HiFive hiFive = new HiFive(profile.getName(),hifiveId,profile.getUserId(),profilePicture);
                                     resultHiFive.add(hiFive);
                                     mHiFiveAdapter.notifyDataSetChanged();
                                 } else {

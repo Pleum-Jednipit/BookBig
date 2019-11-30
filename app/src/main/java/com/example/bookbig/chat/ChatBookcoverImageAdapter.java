@@ -1,5 +1,4 @@
-package com.example.bookbig.bookcover;
-
+package com.example.bookbig.chat;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,33 +7,34 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.bookbig.R;
+import com.example.bookbig.bookcover.Bookcover;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class BookcoverImageAdapter extends RecyclerView.Adapter<BookcoverViewHolder> {
+public class ChatBookcoverImageAdapter extends RecyclerView.Adapter<ChatBookcoverViewHolder> {
     private List<Bookcover> bookcoverList;
     private Context context;
 
-    public BookcoverImageAdapter(List<Bookcover> bookcoverList, Context context) {
+    public ChatBookcoverImageAdapter(List<Bookcover> bookcoverList, Context context) {
         this.bookcoverList = bookcoverList;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public BookcoverViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ChatBookcoverViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bookcover,null,false);
         RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutView.setLayoutParams(layoutParams);
-        BookcoverViewHolder bookcoverViewHolder = new BookcoverViewHolder(layoutView);
+        ChatBookcoverViewHolder bookcoverViewHolder = new ChatBookcoverViewHolder(layoutView);
         return bookcoverViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BookcoverViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ChatBookcoverViewHolder holder, int position) {
         holder.mBookcoverId.setText(bookcoverList.get(position).getBookcoverId());
         holder.mBookcoverName.setText(bookcoverList.get(position).getName());
         holder.mBookcoverImage.setScaleType(ImageView.ScaleType.CENTER_CROP);

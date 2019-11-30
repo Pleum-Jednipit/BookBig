@@ -14,37 +14,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".bookcover.BookcoverActivity"></activity>
+        <activity android:name=".chat.ChatBookcoverActivity"></activity>
+        <activity android:name=".bookcover.BookcoverActivity" />
         <activity android:name=".login.VerifyPhoneActivity" />
-        <activity android:name=".login.PhoneLoginActivity" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+        <activity android:name=".login.PhoneLoginActivity"/>
+        <activity android:name=".chat.ChatBookcoverDisplayActivity"
+            android:theme="@style/AppTheme.Popup" />/>
         <activity
             android:name=".chat.ChatActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".hifive.HiFiveActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".setting.UserProfileActivity" android:theme="@style/AppTheme.Popup"/>
-        <activity android:name=".setting.NewBookcoverActivity" android:theme="@style/AppTheme.Popup" />
+        <activity
+            android:name=".setting.UserProfileActivity"
+            android:theme="@style/AppTheme.Popup" />
+        <activity
+            android:name=".setting.NewBookcoverActivity"
+            android:theme="@style/AppTheme.Popup" />
         <activity android:name=".setting.SettingActivity" />
         <activity android:name=".setting.UserInfoActivity" />
         <activity android:name=".registration.AddFirstBookCoverActivity" />
         <activity android:name=".registration.GenderRegistrationActivity" />
         <activity android:name=".registration.AgeRegistrationActivity" />
         <activity android:name=".registration.UserProfileRegistrationActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".login.LoginHomePageActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".login.ChooseLoginRegistrationActivity" />
-
-
-
-
     </application>
 
 </manifest>

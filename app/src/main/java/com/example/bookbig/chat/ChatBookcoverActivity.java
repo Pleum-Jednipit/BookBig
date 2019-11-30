@@ -1,10 +1,9 @@
-package com.example.bookbig.bookcover;
+package com.example.bookbig.chat;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -15,10 +14,9 @@ import android.widget.TextView;
 
 import com.example.bookbig.FirestoreOperation;
 import com.example.bookbig.R;
-import com.example.bookbig.chat.ChatActivity;
-import com.example.bookbig.hifive.HiFiveActivity;
-import com.example.bookbig.registration.AddFirstBookCoverActivity;
-import com.example.bookbig.registration.GenderRegistrationActivity;
+import com.example.bookbig.bookcover.Bookcover;
+import com.example.bookbig.bookcover.BookcoverActivity;
+import com.example.bookbig.bookcover.BookcoverImageAdapter;
 import com.example.bookbig.setting.NewBookcoverActivity;
 import com.example.bookbig.setting.UserInfoActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,61 +25,59 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.awt.font.TextAttribute;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookcoverActivity extends AppCompatActivity {
+public class ChatBookcoverActivity extends AppCompatActivity {
     private static final String TAG = "Gallery : ";
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mBookcverImageAdapter;
+    private RecyclerView.Adapter mBookcoverImageAdapter;
     private RecyclerView.LayoutManager mBookcoverLayoutManager;
     private List<Bookcover> resultBookcover = new ArrayList<>();
     private FloatingActionButton mFloatingActionButton;
     private FirestoreOperation firestoreOperation;
-    private TextView mTitle;
-
+    private String userId,hifiveId,name;
+    private TextView mProfileName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookcover);
         firestoreOperation = new FirestoreOperation();
 
+        userId = getIntent().getExtras().getString("userId");
+        hifiveId = getIntent().getExtras().getString("hifiveId");
+        name = getIntent().getExtras().getString("name");
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        mProfileName = findViewById(R.id.profileName);
+        mProfileName.setText(name + "'s Bookcovers");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mTitle = findViewById(R.id.profileName);
-        mTitle.setText("My Bookcovers");
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(BookcoverActivity.this, UserInfoActivity.class);
+                Intent intent = new Intent(ChatBookcoverActivity.this, ChatActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("hifiveId",hifiveId);
+                bundle.putString("name",name);
+                bundle.putString("userId",userId);
+                intent.putExtras(bundle);
                 startActivity(intent);
-                finish();
             }
         });
 
-        getUserBookCover(firestoreOperation.getCurrentUserId());
+        getUserBookCover(userId);
 
 
         mRecyclerView = findViewById(R.id.recyclerview);
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(true);
         mFloatingActionButton = findViewById(R.id.floating_action_button);
-
-        mBookcoverLayoutManager = new GridLayoutManager(BookcoverActivity.this,3);
+        mFloatingActionButton.hide();
+        mBookcoverLayoutManager = new GridLayoutManager(ChatBookcoverActivity.this,3);
         mRecyclerView.setLayoutManager(mBookcoverLayoutManager);
-        mBookcverImageAdapter = new BookcoverImageAdapter(getDataSetBookcover(), BookcoverActivity.this);
-        mRecyclerView.setAdapter(mBookcverImageAdapter);
-        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(BookcoverActivity.this, NewBookcoverActivity.class);
-                startActivity(intent);
-//                finish();
-            }
-        });
+        mBookcoverImageAdapter = new ChatBookcoverImageAdapter(getDataSetBookcover(), ChatBookcoverActivity.this);
+        mRecyclerView.setAdapter(mBookcoverImageAdapter);
 
     }
 
@@ -109,11 +105,11 @@ public class BookcoverActivity extends AppCompatActivity {
                                 String bookcoverType = document.getData().get("bookcoverType").toString();
                                 Bookcover bookcover = new Bookcover(name, description, photoUrl, userId, bookcoverId,bookcoverType);
                                 resultBookcover.add(bookcover);
-                                }
                             }
-                        mBookcverImageAdapter.notifyDataSetChanged();
                         }
-                    });
+                        mBookcoverImageAdapter.notifyDataSetChanged();
+                    }
+                });
     }
 
     private List<Bookcover> getDataSetBookcover() {
@@ -122,3 +118,4 @@ public class BookcoverActivity extends AppCompatActivity {
 
 
 }
+

@@ -6,7 +6,7 @@
     android:layout_height="500dp"
     android:layout_gravity="center"
     android:background="#E2A263"
-    tools:context=".setting.NewBookcoverActivity">
+    tools:context=".chat.ChatBookcoverDisplayActivity">
 
 
     <LinearLayout
@@ -18,12 +18,11 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/bookName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/psl114"
-            android:text="Add Book"
             android:textSize="40dp" />
 
         <LinearLayout
@@ -44,12 +43,6 @@
                     android:layout_marginBottom="20dp"
                     android:background="#FBC996" />
 
-                <Button
-                    android:id="@+id/addPhoto"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/lock" />
             </RelativeLayout>
 
             <LinearLayout
@@ -60,44 +53,26 @@
                 android:orientation="vertical">
 
 
-                <Spinner
+                <TextView
                     android:id="@+id/type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
-
-                <EditText
-                    android:id="@+id/name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:hint="Book's name"
                     android:paddingLeft="10dp"
                     android:singleLine="true" />
 
-                <EditText
+                <TextView
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:hint="Book's description"
                     android:paddingLeft="10dp" />
 
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/done"
-                android:layout_width="100dp"
-                android:layout_height="98dp"
-                android:layout_gravity="right"
-                android:layout_marginTop="360dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="0dp"
-                android:background="@drawable/buttonaccept" />
         </LinearLayout>
 
     </LinearLayout>

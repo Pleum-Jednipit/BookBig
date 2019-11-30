@@ -24,6 +24,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,8 @@ import androidx.annotation.Nullable;
 public class FirestoreOperation {
     private static final String TAG = "FirestoreOperation: ";
     private static final String DEFAULT = "https://firebasestorage.googleapis.com/v0/b/bookbig-3ce6d.appspot.com/o/bookcover%2Fagenda.png?alt=media&token=61df2a07-fea7-4e9e-890c-03750dd60937";
+    private static final String maleProfile = "https://firebasestorage.googleapis.com/v0/b/bookbig-3ce6d.appspot.com/o/bookcover%2Fuser%20boy3.png?alt=media&token=2275dd43-9ff5-4651-bbcc-8442bb864f86";
+    private static final String femaleProfile = "https://firebasestorage.googleapis.com/v0/b/bookbig-3ce6d.appspot.com/o/bookcover%2Fuser%20girl3.png?alt=media&token=b38fa169-036e-41ca-866d-6d2e55c58afb";
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String currentUserId;
@@ -98,10 +101,17 @@ public class FirestoreOperation {
     }
 
     public void updateUserAccount(String name, String age, String gender) {
+        String profilePicture;
+        if(gender.equals("Male")){
+            profilePicture = maleProfile;
+        }else {
+            profilePicture = femaleProfile;
+        }
         Map<String, Object> userAccount = new HashMap<>();
         userAccount.put("name", name);
         userAccount.put("age", age);
         userAccount.put("gender", gender);
+        userAccount.put("profilePicture", profilePicture);
         currentUserAccountRef
                 .update(userAccount)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -136,10 +146,10 @@ public class FirestoreOperation {
 
 
 
-    public void setBookcover(final String name, final String description, Uri imageUri) {
+    public void setBookcover(final String name, final String description, Uri imageUri, final String bookcoverType) {
         if (imageUri == null) {
             String id = bookcoverRef.document().getId();
-            Bookcover bookcover = new Bookcover(name, description, DEFAULT, currentUserId, id);
+            Bookcover bookcover = new Bookcover(name, description, DEFAULT, currentUserId, id,bookcoverType);
             // Add a new data with document from email //TODO Change to phonenumber later
             bookcoverRef.document(id)
                     .set(bookcover)
@@ -173,7 +183,7 @@ public class FirestoreOperation {
                         @Override
                         public void onSuccess(Uri photoUrl) {
                             String id = bookcoverRef.document().getId();
-                            Bookcover bookcover = new Bookcover(name, description, photoUrl.toString(), currentUserId, id);
+                            Bookcover bookcover = new Bookcover(name, description, photoUrl.toString(), currentUserId, id,bookcoverType);
                             // Add a new data with document from email //TODO Change to phonenumber later
                             bookcoverRef.document(id)
                                     .set(bookcover)
@@ -190,6 +200,70 @@ public class FirestoreOperation {
                                             Log.w(TAG, "Error adding document", e);
                                         }
                                     });
+                        }
+                    });
+                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                    // ...
+                }
+            });
+        }
+    }
+
+    public void updateBookcover(final String name, final String description, final Uri imageUri,final String bookcoverType,final String bookcoverId) {
+        if (imageUri == null) {
+            Map<String, Object> bookcover = new HashMap<>();
+            bookcover.put("name", name);
+            bookcover.put("description", description);
+            bookcover.put("bookcoverType", bookcoverType);
+            bookcoverRef
+                    .document(bookcoverId)
+                    .update(bookcover)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, "Update Successful");
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d(TAG, "Failed to Update");
+                }
+            });
+        }else {
+            StorageReference storageRef = storage.getReference();
+            final StorageReference imageRef = storageRef.child("bookcover/" + imageUri.getLastPathSegment());
+            UploadTask uploadTask = imageRef.putFile(imageUri);
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle unsuccessful uploads
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri photoUrl) {
+                            // Add a new data with document from email //TODO Change to phonenumber later
+                            Map<String, Object> bookcover = new HashMap<>();
+                            bookcover.put("name", name);
+                            bookcover.put("description", description);
+                            bookcover.put("photoUrl", photoUrl.toString());
+                            bookcover.put("bookcoverType", bookcoverType);
+                            bookcoverRef
+                                    .document(bookcoverId)
+                                    .update(bookcover)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG, "Update Successful");
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d(TAG, "Failed to Update");
+                                }
+                            });
                         }
                     });
                     // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.

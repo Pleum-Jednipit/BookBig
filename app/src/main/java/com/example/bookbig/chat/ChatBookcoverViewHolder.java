@@ -1,4 +1,4 @@
-package com.example.bookbig.bookcover;
+package com.example.bookbig.chat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +13,11 @@ import com.example.bookbig.setting.NewBookcoverActivity;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class BookcoverViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class ChatBookcoverViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     public TextView mBookcoverName,mBookcoverId;
     public ImageView mBookcoverImage;
 
-    public BookcoverViewHolder(@NonNull View itemView) {
+    public ChatBookcoverViewHolder(@NonNull View itemView) {
         super(itemView);
         itemView.setOnClickListener(this);
 
@@ -28,10 +28,11 @@ public class BookcoverViewHolder extends RecyclerView.ViewHolder implements View
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(view.getContext(), NewBookcoverActivity.class);
+        Intent intent = new Intent(view.getContext(), ChatBookcoverDisplayActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("bookcoverId",mBookcoverId.getText().toString());
         intent.putExtras(bundle);
         view.getContext().startActivity(intent);
     }
 }
+

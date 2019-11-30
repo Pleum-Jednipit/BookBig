@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class HiFiveViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-    public TextView mHiFiveId,mHiFiveName;
+    public TextView mHiFiveId,mHiFiveName,mHifiveUserId;
     public ImageView mHiFiveImage;
 
     public HiFiveViewHolder(@NonNull View itemView) {
@@ -22,6 +22,7 @@ public class HiFiveViewHolder extends RecyclerView.ViewHolder implements View.On
 
         mHiFiveId = itemView.findViewById(R.id.hifiveId);
         mHiFiveName = itemView.findViewById(R.id.hifiveName);
+        mHifiveUserId = itemView.findViewById(R.id.userId);
         mHiFiveImage = itemView.findViewById(R.id.hifiveImage);
     }
 
@@ -31,6 +32,7 @@ public class HiFiveViewHolder extends RecyclerView.ViewHolder implements View.On
         Bundle bundle = new Bundle();
         bundle.putString("hifiveId",mHiFiveId.getText().toString());
         bundle.putString("name",mHiFiveName.getText().toString());
+        bundle.putString("userId",mHifiveUserId.getText().toString());
         intent.putExtras(bundle);
         view.getContext().startActivity(intent);
     }

@@ -4,18 +4,23 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.bookbig.FirestoreOperation;
 import com.example.bookbig.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,7 +31,9 @@ public class UserProfileActivity extends AppCompatActivity {
     private static final String TAG = "UserProfileActivity: ";
     private EditText mName,mAge;
     private RadioGroup mGender;
+    private ImageView mImageView;
     private Button mSave;
+    private RadioButton mRadioMale,mRadioFemale;
     private FirestoreOperation firestoreOperation;
 
 
@@ -54,7 +61,10 @@ public class UserProfileActivity extends AppCompatActivity {
         mName = findViewById(R.id.name);
         mAge = findViewById(R.id.age);
         mSave = findViewById(R.id.save);
+        mImageView = findViewById(R.id.profilePicture);
         mGender = findViewById(R.id.gender);
+        mRadioMale = findViewById(R.id.male);
+        mRadioFemale = findViewById(R.id.female);
         firestoreOperation.getCurrentUserAccountRef()
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -67,10 +77,15 @@ public class UserProfileActivity extends AppCompatActivity {
                                 String name = document.getData().get("name").toString();
                                 String age = document.getData().get("age").toString();
                                 String gender = document.getData().get("gender").toString();
-                                String phoneNumber = document.getData().get("phoneNumber").toString();
-
+                                String profilePic = document.getData().get("profilePicture").toString();
                                 mName.setText(name);
                                 mAge.setText(age);
+                                Glide.with(getBaseContext()).load(profilePic).into(mImageView);
+                                if(gender.equals("Male")){
+                                    mGender.check(mRadioMale.getId());
+                                } else {
+                                    mGender.check(mRadioFemale.getId());
+                                }
 
                             } else {
                                 Log.d(TAG, "No such document");
@@ -96,6 +111,29 @@ public class UserProfileActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        mName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        mAge.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
 

@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".registration.AgeRegistrationActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    android:focusable="true">
 
 
 
@@ -76,6 +79,7 @@
                 android:textSize="50dp" />
 
             <EditText
+                android:inputType="number"
                 android:id="@+id/age"
                 android:layout_width="245dp"
                 android:layout_height="wrap_content"
