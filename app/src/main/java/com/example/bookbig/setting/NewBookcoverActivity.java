@@ -42,6 +42,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class NewBookcoverActivity extends AppCompatActivity {
@@ -56,6 +57,8 @@ public class NewBookcoverActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirestoreOperation firestoreOperation;
     private String bookcoverId = "None";
+    final List<String> bookcoverType = Arrays.asList
+            ("Adventure","Sci fi","Romantic","Fantasy","Mystery","Horror","Comedy","Historical");
 
 
     @Override
@@ -137,11 +140,8 @@ public class NewBookcoverActivity extends AppCompatActivity {
             }
         });
 
-
-        final List<String> bookcoverType = new ArrayList<>();
         //Add book cover type
-        bookcoverType.add("Romantice");
-        bookcoverType.add("Sci fi");
+
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(NewBookcoverActivity.this,android.R.layout.simple_spinner_item, bookcoverType);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner = findViewById(R.id.type);
@@ -254,12 +254,14 @@ public class NewBookcoverActivity extends AppCompatActivity {
                                     String description = document.getData().get("description").toString();
                                     String userId = document.getData().get("userId").toString();
                                     String photoUrl = document.getData().get("photoUrl").toString();
-                                    String bookcoverType = document.getData().get("bookcoverType").toString();
-                                    Bookcover bookcover = new Bookcover(name, description, photoUrl, userId, bookcoverId,bookcoverType);
+                                    String type = document.getData().get("bookcoverType").toString();
+                                    Bookcover bookcover = new Bookcover(name, description, photoUrl, userId, bookcoverId,type);
                                     mName.setText(bookcover.getName());
                                     mDescription.setText(bookcover.getDescription());
                                     Glide.with(getBaseContext()).load(bookcover.getPhotoUrl()).into(mImageView);
-                                    mSpinner.setSelection(1);
+                                    int index = bookcoverType.indexOf(type);
+                                    mSpinner.setSelection(index);
+
                                 }
                             } else {
                                 Log.d(TAG, "Error getting documents: ", task.getException());

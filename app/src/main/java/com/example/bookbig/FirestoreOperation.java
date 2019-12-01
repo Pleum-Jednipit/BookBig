@@ -49,6 +49,7 @@ public class FirestoreOperation {
     private CollectionReference likeRef;
     private CollectionReference messageRef;
     private FirebaseFirestoreSettings settings;
+    private boolean hifive = false;
 
     public DocumentReference getCurrentUserAccountRef() {
         return currentUserAccountRef;

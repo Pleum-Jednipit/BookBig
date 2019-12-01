@@ -29,10 +29,21 @@
             android:text="Add Book"
             android:textSize="40dp" />
 
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#FBC996"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -82,7 +93,6 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:background="@drawable/roundedbox"
-                        android:hint="Book's name"
                         android:paddingLeft="10dp"
                         android:singleLine="true" />
                 </LinearLayout>
@@ -107,7 +117,6 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:background="@drawable/roundedbox"
-                        android:hint="Book's description"
                         android:paddingLeft="10dp" />
                 </LinearLayout>
 
@@ -145,6 +154,7 @@
                 android:layout_marginBottom="0dp"
                 android:background="@drawable/buttonaccept" />
         </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 

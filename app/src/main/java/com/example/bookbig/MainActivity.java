@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.bookbig.bookcover.Bookcover;
 import com.example.bookbig.bookcover.BookcoverAdapter;
+import com.example.bookbig.chat.ChatBookcoverDisplayActivity;
 import com.example.bookbig.hifive.HiFiveActivity;
 import com.example.bookbig.setting.UserInfoActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -162,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
                 firestoreOperation.setLike(bookcover);
                 Toast.makeText(MainActivity.this, "Like!!", Toast.LENGTH_SHORT).show();
                 firestoreOperation.isHiFive(bookcover.getUserId());
+
             }
 
             @Override
@@ -182,7 +184,13 @@ public class MainActivity extends AppCompatActivity {
         flingContainer.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
             @Override
             public void onItemClicked(int itemPosition, Object dataObject) {
-                Toast.makeText(MainActivity.this, "Click", Toast.LENGTH_SHORT).show();
+                final Bookcover bookcover = (Bookcover) dataObject;
+                Intent intent = new Intent(MainActivity.this, ChatBookcoverDisplayActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("bookcoverId",bookcover.getBookcoverId());
+                intent.putExtras(bundle);
+                startActivity(intent);
+
             }
         });
 
@@ -330,23 +338,27 @@ public class MainActivity extends AppCompatActivity {
                         for (QueryDocumentSnapshot document : value) {
                             if (document.exists()) {
                                 Log.d(TAG, "WTF " + document.getData().toString());
-                                String userId = document.getData().get("userId").toString();
-                                String longtitude = document.getData().get("longtitude").toString();
-                                String latitude = document.getData().get("latitude").toString();
-                                Location location = new Location("");
-                                location.setLatitude(Double.valueOf(latitude));
-                                location.setLongitude(Double.valueOf(longtitude));
-                                Log.d(TAG, "UserProfile :" + document.getData().toString());
-                                if (!userId.equals(firestoreOperation.getCurrentUserId())) {
-                                    Float calculatedDistance = currentLocation.distanceTo(location);
-                                    int distanceInKM = Math.round(calculatedDistance / 1000);
-                                    Log.d(TAG, "Distance :" + distanceInKM);
-                                    if (distanceInKM <= distance) {
-                                        Profile profile = new Profile(userId, latitude, longtitude);
-                                        Log.d("Location", "UserId :" + userId);
-                                        userInArea.add(profile);
+                                try {
+                                    String userId = document.getData().get("userId").toString();
+                                    String longtitude = document.getData().get("longtitude").toString();
+                                    String latitude = document.getData().get("latitude").toString();
+                                    Location location = new Location("");
+                                    location.setLatitude(Double.valueOf(latitude));
+                                    location.setLongitude(Double.valueOf(longtitude));
+                                    Log.d(TAG, "UserProfile :" + document.getData().toString());
+                                    if (!userId.equals(firestoreOperation.getCurrentUserId())) {
+                                        Float calculatedDistance = currentLocation.distanceTo(location);
+                                        int distanceInKM = Math.round(calculatedDistance / 1000);
+                                        Log.d(TAG, "Distance :" + distanceInKM);
+                                        if (distanceInKM <= distance) {
+                                            Profile profile = new Profile(userId, latitude, longtitude);
+                                            Log.d("Location", "UserId :" + userId);
+                                            userInArea.add(profile);
 
+                                        }
                                     }
+                                }catch (NullPointerException n){
+                                    System.out.println(n);
                                 }
                             }
                         }

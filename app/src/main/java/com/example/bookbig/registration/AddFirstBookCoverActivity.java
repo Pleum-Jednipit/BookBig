@@ -28,6 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AddFirstBookCoverActivity extends AppCompatActivity {
@@ -41,6 +42,8 @@ public class AddFirstBookCoverActivity extends AppCompatActivity {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirestoreOperation firestoreOperation;
+    final List<String> bookcoverType = Arrays.asList
+            ("Adventure","Sci fi","Romantic","Fantasy","Mystery","Horror","Comedy","Historical");
 
 
     @Override
@@ -95,10 +98,6 @@ public class AddFirstBookCoverActivity extends AppCompatActivity {
         });
 
 
-        final List<String> bookcoverType = new ArrayList<>();
-        //Add book cover type
-        bookcoverType.add("Romantice");
-        bookcoverType.add("Sci fi");
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(AddFirstBookCoverActivity.this,android.R.layout.simple_spinner_item, bookcoverType);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner = findViewById(R.id.type);
